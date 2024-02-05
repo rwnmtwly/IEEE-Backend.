@@ -70,3 +70,5 @@ It's designed to meet the needs of both novice and experienced postgres users al
 1. [Youtube](https://www.youtube.com/watch?v=tzbA7VniRpw&list=PLwvrYc43l1MxAEOI_KwGe8l42uJxMoKeS&index=3&pp=iAQB).
 1. [Hasura](https://hasura.io/learn/database/postgresql/installation/3-psql/).
 1. [Youtube](https://www.youtube.com/watch?v=FFo8pH-kfQ8&list=PLwvrYc43l1MxAEOI_KwGe8l42uJxMoKeS&index=6).
+1. [Enterprise DB](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjF6sfH_ZSEAxVCdqQEHRfIBDEQFnoECBAQAw&url=https%3A%2F%2Fwww.enterprisedb.com%2Fpostgres-tutorials%2Fpgadmin-comparable-tool-plsql-developer-postgresql&usg=AOvVaw0HfEVHAs7y0DD_ucG0w8Qm&opi=89978449)
+1. [Geeks for Geeks](https://www.geeksforgeeks.org/postgresql-naming-conventions/).
