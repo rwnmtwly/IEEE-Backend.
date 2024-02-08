@@ -8,8 +8,11 @@
 1. [What purpose does pgAdmin serve in PostgreSQL?](#what-purpose-does-pgadmin-serve-in-postgresql)
 1. [Naming conventions.](#naming-conventions)
 1. [Refernces in order of appearance.](#refernces-in-order-of-appearance)
+1. [Constraints in Postgresql.](#constraints-in-postgresql)
+1. [Indexing in Postgresql.](#indexing-in-postgresql)
 <br>
----
+
+--- 
 
 ### What is RDBMS?
 It stands for Relational Database Management System, and it's a program used to create, update, and manage relational databases.
@@ -22,7 +25,7 @@ It stands for Relational Database Management System, and it's a program used to 
 - Microsoft SQL Server
 - Oracle Database.
 ---
-### RDBMS vs. DBMS.
+### RDBMS vs. DBMS:
 
 |RDBMS |DBMS|
 |:--------------|:------------|
@@ -40,7 +43,7 @@ It stands for Relational Database Management System, and it's a program used to 
 It's a modern opensource object-relational database management system, released: july 8, 1996.
 
 ---
-### PostgreSQL Clients.
+### PostgreSQL Clients: 
 Clients are just wrappers over the SQL commands that get excuted on the server and return a response.
 
 To connect to the database using clients, *there are different types*:
@@ -64,11 +67,64 @@ It's designed to meet the needs of both novice and experienced postgres users al
 - Names in Postgres must be unique within each type of each object. They cannot be the same as another PostgreSQL object that has the same type.
 - The Postgres system uses no more than NAMEDATALEN-1 characters of a name. longer names will be truncated. So, NAMEDATALEN is 32 so the maximum name length is 31 but at the time the system is built.
 ---
+
+### Constraints in Postgresql:
+Constraints are the rules enforced on data columns on table. These are used to prevent invalid data from being entered into the database. This ensures the accuracy and reliability of the data in the database.
+
+Constraints could be column level or table level. Column level constraints are applied only to one column whereas table level constraints are applied to the whole table. Defining a data type for a column is a constraint in itself. For example, a column of type DATE constrains the column to valid dates.
+
+|Constraint Type |Function|
+|:---------------|:-------|
+|NOT NULL |Ensures that a column cannot have NULL value.|
+|UNIQUE |Ensures that all values in a column are different.|
+|PRIMARY Key |Uniquely identifies each row/record in a database table.|
+|FOREIGN Key |Constrains data based on columns in other tables.|
+|CHECK |The CHECK constraint ensures that all values in a column satisfy certain conditions.|
+|EXCLUSION |The EXCLUDE constraint ensures that if any two rows are compared on the specified column(s) or expression(s) using the specified operator(s), not all of these comparisons will return TRUE.| 
+
+--- 
+
+### Indexing in Postgresql:
+Indexing in PostgreSQL is a process that involves creating data structures that are optimized to efficiently search and retrieve data from tables.
+
+PostgreSQL has several index types: B-tree, Hash, GiST, SP-GiST, GIN, and BRIN. Each index type uses a different storage structure and algorithm to cope with different kinds of queries.
+
+When you use the `CREATE INDEX` statement without specifying the index type, PostgreSQL uses the B-tree index type by default because it is best to fit the most common queries.
+
+#### B-tree indexing:
+B-tree is a self-balancing tree that maintains sorted data and allows searches, insertions, deletions, and sequential access in logarithmic time.
+
+#### Hash indexes:
+Hash indexes can handle only simple equality comparison (=). It means that whenever an indexed column is involved in a comparison using the equal(=) operator, the query planner will consider using a hash index.
+
+#### GIN indexes:
+GIN stands for generalized inverted indexes. Useful when you have multiple values stored in a single column, for example, hstore, array, jsonb, and range types.
+
+#### BRIN:
+BRIN stands for block range indexes. BRIN is much smaller and less costly to maintain in comparison with a B-tree index.
+
+BRIN allows the use of an index on a very large table that would previously be impractical using a B-tree without horizontal partitioning.
+
+BRIN is often used on a column that has a linear sort order, for example, the created date column of the sales order table.
+
+#### GiST:
+GiST stands for Generalized Search Tree. GiST indexes allow the building of general tree structures. GiST indexes are useful in indexing geometric data types and full-text searches.
+
+#### SP-GiST:
+SP-GiST stands for space-partitioned GiST. SP-GiST supports partitioned search trees that facilitate the development of a wide range of different non-balanced data structures.
+
+SP-GiST indexes are most useful for data that has a natural clustering element to it and is also not an equally balanced tree, for example, GIS, multimedia, phone routing, and IP routing.
+
+--- 
+
 ### Refernces in order of appearance:
 1. [Google cloud](https://cloud.google.com/learn/what-is-a-relational-database).
 1. [Geeks for Geeks](https://www.geeksforgeeks.org/difference-between-rdbms-and-dbms/).
 1. [Youtube](https://www.youtube.com/watch?v=tzbA7VniRpw&list=PLwvrYc43l1MxAEOI_KwGe8l42uJxMoKeS&index=3&pp=iAQB).
 1. [Hasura](https://hasura.io/learn/database/postgresql/installation/3-psql/).
 1. [Youtube](https://www.youtube.com/watch?v=FFo8pH-kfQ8&list=PLwvrYc43l1MxAEOI_KwGe8l42uJxMoKeS&index=6).
-1. [Enterprise DB](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjF6sfH_ZSEAxVCdqQEHRfIBDEQFnoECBAQAw&url=https%3A%2F%2Fwww.enterprisedb.com%2Fpostgres-tutorials%2Fpgadmin-comparable-tool-plsql-developer-postgresql&usg=AOvVaw0HfEVHAs7y0DD_ucG0w8Qm&opi=89978449)
+1. [Enterprise DB](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjF6sfH_ZSEAxVCdqQEHRfIBDEQFnoECBAQAw&url=https%3A%2F%2Fwww.enterprisedb.com%2Fpostgres-tutorials%2Fpgadmin-comparable-tool-plsql-developer-postgresql&usg=AOvVaw0HfEVHAs7y0DD_ucG0w8Qm&opi=89978449).
 1. [Geeks for Geeks](https://www.geeksforgeeks.org/postgresql-naming-conventions/).
+1. [Tutorials Point](https://www.tutorialspoint.com/postgresql/postgresql_constraints.htm).
+1. [Free Code Camp](https://www.freecodecamp.org/news/postgresql-indexing-strategies/).
+1. [PostgreSQL Tutorial](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/).
