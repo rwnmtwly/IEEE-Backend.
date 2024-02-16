@@ -10,6 +10,9 @@
 1. [Refernces in order of appearance.](#refernces-in-order-of-appearance)
 1. [Constraints in Postgresql.](#constraints-in-postgresql)
 1. [Indexing in Postgresql.](#indexing-in-postgresql)
+1. [Relationships](#relationships)
+    * [One to one](#one-to-one)
+    * [One to many](#one-to-many) 
 <br>
 
 --- 
@@ -115,6 +118,47 @@ SP-GiST stands for space-partitioned GiST. SP-GiST supports partitioned search t
 
 SP-GiST indexes are most useful for data that has a natural clustering element to it and is also not an equally balanced tree, for example, GIS, multimedia, phone routing, and IP routing.
 
+### Relationships:
+Relationships between tables are established using keys.
+
+#### One to one:
+* In a one-to-one relationship, each record in one table is related to exactly one record in another table, and vice versa.
+* This relationship is established by creating a foreign key in one table that references the primary key in the other table.
+* One common use case for a one-to-one relationship is when you have related information that you want to separate into distinct tables for organizational or performance reasons.
+* For example, in a database for a company, you might have a **users** table and a **user_profile** table. Each user record in the users table might have a corresponding profile record in the user_profile table.
+
+``` sql
+-- One-to-One Relationship
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(50) UNIQUE
+);
+
+CREATE TABLE user_profile (
+    id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE,
+    full_name VARCHAR(100),
+    FOREIGN KEY (user_id) REFERENCES users(id)
+); 
+``` 
+#### One to many:
+* In a one-to-many relationship, each record in one table can be related to one or more records in another table, but each record in the related table is related to only one record in the first table.
+* This relationship is established by creating a foreign key in the "many" side table that references the primary key in the "one" side table.
+* For example, in a database for a library, you might have a **books** table and an **authors** table. Each book can have only one author, but each author can have written multiple books. So, the **books** table would have a foreign key column referencing the **authors** table.
+``` sql
+-- One-to-Many Relationship
+CREATE TABLE authors (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(100)
+);
+
+CREATE TABLE books (
+    id SERIAL PRIMARY KEY,
+    title VARCHAR(255),
+    author_id INT,
+    FOREIGN KEY (author_id) REFERENCES authors(id)
+);
+```
 --- 
 
 ### Refernces in order of appearance:
@@ -128,3 +172,4 @@ SP-GiST indexes are most useful for data that has a natural clustering element t
 1. [Tutorials Point](https://www.tutorialspoint.com/postgresql/postgresql_constraints.htm).
 1. [Free Code Camp](https://www.freecodecamp.org/news/postgresql-indexing-strategies/).
 1. [PostgreSQL Tutorial](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/).
+1. [ChatGPT](https://chat.openai.com/share/3e0a9f1b-70a4-46f2-b022-f21dac8241c3).
