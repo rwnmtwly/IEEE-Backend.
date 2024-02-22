@@ -10,9 +10,13 @@
 1. [Refernces in order of appearance.](#refernces-in-order-of-appearance)
 1. [Constraints in Postgresql.](#constraints-in-postgresql)
 1. [Indexing in Postgresql.](#indexing-in-postgresql)
-1. [Relationships](#relationships)
-    * [One to one](#one-to-one)
-    * [One to many](#one-to-many) 
+1. [Relationships:](#relationships)
+    * [One to one.](#one-to-one)
+    * [One to many.](#one-to-many)
+ 
+1. [Multi-version concurrency Control.](#multi-version-concurrency-control)
+1. [Triggers.](#triggers)
+1. [How can you take the backup of a database?.](#how-can-you-take-the-backup-of-a-database)
 <br>
 
 --- 
@@ -160,7 +164,61 @@ CREATE TABLE books (
 );
 ```
 --- 
+### Multi-version concurrency Control:
+(MCC or MVCC), is a non-locking concurrency control method commonly used by database management systems to provide concurrent access to the database and in programming languages to implement transactional memory.
 
+Unlike most other database systems which use locks for concurrency control, Postgres maintains data consistency by using a multiversion model. This means that while querying a database each transaction sees a snapshot of data (a database version) as it was some time ago, regardless of the current state of the underlying data. This protects the transaction from viewing inconsistent data that could be caused by (other) concurrent transaction updates on the same data rows, providing *transaction isolation* for each database session.
+
+The main difference between multiversion and lock models is that in MVCC locks acquired for querying (reading) data don't conflict with locks acquired for writing data and so reading never blocks writing and writing never blocks reading.
+
+---
+
+### Triggers:
+A trigger is a specification that the database should automatically execute a particular function whenever a certain type of operation is performed. Triggers can be defined to execute either before or after any INSERT, UPDATE, or DELETE operation, either once per modified row, or once per SQL statement. If a trigger event occurs, the trigger's function is called at the appropriate time to handle the event.
+
+PostgreSQL provides two main types of triggers:
+* Row-level triggers.
+* Statement-level triggers.
+
+The differences between the two kinds are how many times the trigger is invoked and at what time.
+
+---
+
+### How can you take the backup of a database?:
+
+A PostgreSQL backup is a copy of the data that you can use to recover the database later. Typically, a backup includes all or selected data, schema, and configuration settings necessary to restore the database to a desired state.
+
+You need to back up PostgreSQL databases regularly to prevent data loss in case of human errors, hardware failures, disasters, or other unforeseen circumstances.
+
+Before backing up the databases, you should consider the following types of backups:
+
+* Logical backups
+* Physical backups
+
+PostgreSQL comes with `pg_dump` and `pg_dumpall` tools that help you perform logical backups effectively. 
+
+#### pg_dump
+
+The `pg_dump` tool is a command-line utility that you can use to create a logical backup of a PostgreSQL database.
+
+The `pg_dump` extracts a PostgreSQL database into a script file or other archive file. The file represents the snapshot of the database at the time `pg_dump` begins running.
+
+The syntax of the `pg_dump` command:
+
+``` sql
+pg_dump [connection_option] [option] [dbname]
+```
+##### pg_dumpall
+The `pg_dumpall` tool is a command-line utility that you can use to create logical backups of the entire PostgreSQL cluster, including all databases, schemas, roles, and other cluster-wide objects.
+
+Unlike the `pg_dump` tool which backups individual databases or objects, the `pg_dumpall` tool offers a convenient way to make a backup of all databases in an PostgreSQL cluster (instance) in a single operation.
+
+The syntax for `pg_dumpall` command:
+
+``` sql 
+pg_dump [connection_option] [option]
+```
+---
 ### Refernces in order of appearance:
 1. [Google cloud](https://cloud.google.com/learn/what-is-a-relational-database).
 1. [Geeks for Geeks](https://www.geeksforgeeks.org/difference-between-rdbms-and-dbms/).
@@ -173,3 +231,8 @@ CREATE TABLE books (
 1. [Free Code Camp](https://www.freecodecamp.org/news/postgresql-indexing-strategies/).
 1. [PostgreSQL Tutorial](https://www.postgresqltutorial.com/postgresql-indexes/postgresql-index-types/).
 1. [ChatGPT](https://chat.openai.com/share/3e0a9f1b-70a4-46f2-b022-f21dac8241c3).
+1. [Wikipedia](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjn_6jRnr-EAxWrQ6QEHZr9BUEQFnoECAYQAQ&url=https%3A%2F%2Fen.wikipedia.org%2Fwiki%2FMultiversion_concurrency_control&usg=AOvVaw0rc8qcKso6XkgObFwC6Pcl&opi=89978449).
+1. [PostgreSQL](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwjn_6jRnr-EAxWrQ6QEHZr9BUEQFnoECBMQAQ&url=https%3A%2F%2Fwww.postgresql.org%2Fdocs%2F7.1%2Fmvcc.html&usg=AOvVaw1L8fO7AddalnLsofUUjgJA&opi=89978449).
+1. [PostgreSQL Tutorial](https://www.postgresqltutorial.com/postgresql-triggers/introduction-postgresql-trigger/).
+1. [PostgreSQL](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=&cad=rja&uact=8&ved=2ahUKEwis3O7ipr-EAxWSVqQEHc6HCXwQFnoECA8QAw&url=https%3A%2F%2Fwww.postgresql.org%2Fdocs%2F8.1%2Ftriggers.html&usg=AOvVaw3jHwll8kUTgNiH3Yifm3pV&opi=89978449).
+1. [PostgreSQL Tutorial](https://www.postgresqltutorial.com/postgresql-administration/postgresql-backup-database/).
