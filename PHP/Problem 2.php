@@ -52,14 +52,6 @@ echo gettype(1+(int)"Hello PHP");
 ?>
 
 
-<?php
-echo '<pre>' 
-print_r([
-    [FrontEnd] => Array,
-]);
-echo '</pre>' 
-?>
-
 
 <?php
 echo '<pre>'; 
