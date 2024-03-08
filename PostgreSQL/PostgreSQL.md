@@ -16,7 +16,7 @@
  
 1. [Multi-version concurrency Control.](#multi-version-concurrency-control)
 1. [Triggers.](#triggers)
-1. [How can you take the backup of a database?.](#how-can-you-take-the-backup-of-a-database)
+1. [How can you take the backup of a database?](#how-can-you-take-the-backup-of-a-database)
 <br>
 
 --- 
@@ -121,6 +121,8 @@ GiST stands for Generalized Search Tree. GiST indexes allow the building of gene
 SP-GiST stands for space-partitioned GiST. SP-GiST supports partitioned search trees that facilitate the development of a wide range of different non-balanced data structures.
 
 SP-GiST indexes are most useful for data that has a natural clustering element to it and is also not an equally balanced tree, for example, GIS, multimedia, phone routing, and IP routing.
+
+---
 
 ### Relationships:
 Relationships between tables are established using keys.
