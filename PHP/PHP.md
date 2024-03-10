@@ -6,6 +6,7 @@
 1. [Sensitivity in PHP](#sensitivity-in-php).
 1. [Programming languages VS. Scripting languages](#programming-languages-vs-scripting-languages).
 1. [Dynamically typed languages VS. Statically Typed languages](#dynamically-typed-languages-vs-statically-typed-languages).
+1. [Assign by value VS. Assign by reference](#assign-by-value-vs-assign-by-reference).
 ---
 
 ## What Is PHP: 
