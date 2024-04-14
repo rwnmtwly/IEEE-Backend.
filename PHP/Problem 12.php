@@ -48,5 +48,5 @@ echo "From Epoch Time Till 1990-10-01 Is Approximately $years_diff Years";
 echo strtotime("now") . "<br>"; 
 $date = new DateTime();
 echo $date->format("U") . "<br>"; 
-echo microtime(true) . "<br>"; 
+echo floor(microtime(true)) . "<br>"; 
 ?>
