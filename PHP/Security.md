@@ -66,7 +66,18 @@ it is the act of persuading someone to reveal their personal information in orde
 **PHP code injection:**
 This could happen by using the include function or by uploading a file as an image but actually contains PHP code you may end up running that code, and if you run your php code on a server you can take control of it such as check the database and see what it has, how many tables, etc...
 
+**Keep it simple:**  
+1. less points of entry: it is better to include all files in an index page instead of having separate pages that would make it easier to infilterate the website and also difficult to trace any errors or attacks,including everything in an index file makes it have only one point of entry.
+1. Segmented code.
+1. OOP. (it is better to have a class for each table that extends the database class).All these points make the code more organized and easier to deal with.
 
+**Principle of least privilege:**  
+1. admin access.
+1. editor access.
+1. user access.
+1. everyone else.
+
+---
 ##  Notes:
 1. It's important to always update your software to the latest version, because the previous ones usually have flows that might have been fixed in the new version. (video #01)
 
@@ -107,7 +118,13 @@ This could happen by using the include function or by uploading a file as an ima
         echo "could not find the file";
     }
     #this is to make sure that the file you are openning exists inside this folder.
-    #this is called white listing; selecting what you want to see as opposed to banning certain things. So this is more secure.
+    #this is called white listing; selecting what you want to see as opposed to banning certain things. So this is more secure. 
     ```
-
-
+1. You should reduce the amount of code you have to edit when fixing your web application.(video #06)
+1. Segmenting code means if you have a code in a file and the code becomes too big it is better to cut an amount of the code and put it in a different file and include the other file this makes it easier to read and trace the code and any errors that occure (makes the code more organised).(video #06)
+1. `session_start()` is required beacause we need the session in order to login a user.(video #10)
+1. The login error messege should not specify wether the email or the password is wrong, instead the message should be more vague such as: *wrong email or password*.This provides more protection against possible information stealing attempts.(video #10)
+1. It is better to not use global variabls because it puts the system at risk.(video #10) 
+1. access should be limited to certain people so that when any problems occue it is easier to guess who might be responsible. (video #11)
+1. access of each user is defined based on the rank of the user. These ranks are created by the developer.(video #11)
+1. SQL injections can be done usually in a form or sometimes in the URL.(video #12)
