@@ -4,6 +4,8 @@
 1. [Inheritance](#inheritance).
 1. [PHP Interfaces & Polymorphism](#php-interfaces--polymorphism).
 1. [PHP Traits](#php-traits).
+1. [Error Handling In PHP](#error-handling-in-php).
+1. [Late Static Binding & How It Works](#late-static-binding--how-it-works).
 
 
 ## Encapsulation & Abstraction:
@@ -128,8 +130,71 @@ class ezcReflectionFunction extends ReflectionFunction {
 ?>
 ```
 ---
+## Error Handling In PHP:
+Certainly! Error handling in PHP involves managing errors, warnings, and notices that occur during the execution of a PHP script. PHP provides several mechanisms for handling errors:
+
+1. **Error Reporting**: PHP allows you to control the level of error reporting using the `error_reporting()` function or by setting configurations in `php.ini` file. You can specify which types of errors PHP should report.
+
+2. **Display Errors**: You can control whether errors are displayed to the user or logged to a file using the `display_errors` directive in `php.ini`.
+
+3. **Error Logging**: PHP provides `error_log()` function to log errors to a file or other destinations like syslog or a database.
+
+4. **Try...Catch Blocks**: PHP supports exceptions for handling errors in object-oriented code. You can use `try`, `catch`, and `finally` blocks to handle exceptions gracefully.
+
+    ```php
+    try {
+        // Code that may throw an exception
+    } catch (Exception $e) {
+        // Handle the exception
+    } finally {
+        // Optional cleanup code, runs whether or not an exception occurred
+    }
+    ```
+
+5. **Custom Error Handling**: You can define custom error handlers using the `set_error_handler()` function to handle errors in a custom way, such as logging or displaying a custom error page.
+
+    ```php
+    function customErrorHandler($errno, $errstr, $errfile, $errline) {
+        // Handle the error
+    }
+    set_error_handler("customErrorHandler");
+    ```
+
+6. **Exception Handling**: You can create custom exception classes by extending the built-in `Exception` class. This allows you to throw and catch specific types of exceptions.
+
+    ```php
+    class CustomException extends Exception {
+        public function errorMessage() {
+            // Custom error message
+        }
+    }
+    ```
+
+7. **Error Suppression**: You can suppress errors using the `@` symbol before an expression, but it's generally not recommended as it can lead to silent failures and debugging issues.
+
+    ```php
+    $result = @some_function(); // Error suppression
+    ```
+
+When handling errors in PHP, it's important to strike a balance between providing useful feedback to developers for debugging and preventing sensitive information from being exposed to end-users. Additionally, error handling practices should be consistent and thorough across your codebase.
+
+---
+## Late Static Binding & How It Works:
+ More precisely, late static bindings work by storing the class named in the last "non-forwarding call". In case of static method calls, this is the class explicitly named (usually the one on the left of the `::` operator); in case of non static method calls, it is the class of the object. A "forwarding call" is a static one that is introduced by `self::`, `parent::`, `static::`, or, if going up in the class hierarchy, forward_static_call(). The function get_called_class() can be used to retrieve a string with the name of the called class and `static::` introduces its scope.
+
+This feature was named "late static bindings" with an internal perspective in mind. "Late binding" comes from the fact that `static::` will not be resolved using the class where the method is defined but it will rather be computed using runtime information. It was also called a "static binding" as it can be used for (but is not limited to) static method calls.
+
+**Limitations of** `self::`  
+Static references to the current class like `self::` or `__CLASS__` are resolved using the class in which the function belongs, as in where it was defined.
+
+**Late Static Bindings' usage**   
+Late static bindings tries to solve that limitation by introducing a keyword that references the class that was initially called at runtime. Basically, a keyword that would allow referencing B from test() in the previous example. It was decided not to introduce a new keyword but rather use static that was already reserved. 
+
+---
 ## Refernces in order of their appearance:
 1. [Stack Overflow](https://stackoverflow.com/questions/15176356/difference-between-encapsulation-and-abstraction).
 1. [Geeks for Geeks](https://www.geeksforgeeks.org/what-is-inheritance-in-php/).
 1. ChatGPT.
 1. [PHP](https://www.php.net/manual/en/language.oop5.traits.php).
+1. [PHP](https://www.php.net/manual/en/language.oop5.late-static-bindings.php).
+1. ChatGPT.
