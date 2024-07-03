@@ -1,3 +1,4 @@
+<?php use \app\core\Application;?>
 <!doctype html>
 <html lang="en">
   <head>
@@ -25,6 +26,7 @@
         <li class="nav-item">
           <a class="nav-link" href="/contact.php">Contact</a>
       </ul>
+      <?php if(Application::isGuest()): ?>
       <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
         <li class="nav-item active">
           <a class="nav-link active"  href="/login">login</a>
@@ -32,9 +34,26 @@
         <li class="nav-item">
           <a class="nav-link" href="/register">Register</a>
       </ul>
+      <?php else:?>
+        <ul class="navbar-nav ml-auto mb-2 mb-lg-0">
+        <li class="nav-item active">
+          <a class="nav-link active"  href="/profile">Profile</a>
+        </li>
+        <li class="nav-item active">
+          <a class="nav-link active"  href="/logout">Welcome<?php echo Application::$app->user->getDisplayName() ?>
+          (logout)
+        </a>
+        </li>
+        </ul>
+        <?php endif;?>
   </div>
 </nav>
     <div class="container">
+      <?php if(Application::$app->session->getFlash('success')): ?>
+      <div class="alert alert-success">
+        <?php echo Application::$app->session->getFlash('success'); ?>
+      </div>
+      <?php endif; ?>
       {{content}}
     </div>
 

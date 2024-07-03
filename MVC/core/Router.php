@@ -46,7 +46,7 @@ class Router{
             Application::$app->controller = new $callback[0]();
             $callback = Application::$app->controller;
         }
-        return call_user_func($callback, $this->request);
+        return call_user_func($callback, $this->request,$this->response);
         // echo '<pre>';
         // var_dump($callback);
         // echo '</pre>';
@@ -60,7 +60,11 @@ class Router{
     }
 
     protected function layoutContent(){
-        $layout = Application::$app->controller->layout;
+        $layput = Application::$app->layout;
+        if(Application::$app->controller){
+
+            $layout = Application::$app->controller->layout;
+        }
         ob_start();
         include_once Application::$ROOT_DIR."/../views/layouts/$layout.php";
         return ob_get_clean();
