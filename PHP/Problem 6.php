@@ -2,7 +2,7 @@
 $index = 10;
 while($index>0){
     echo $index;
-    echo "<br>"
+    echo "<br>";
     $index-=1;
 }
 ?>
@@ -47,7 +47,7 @@ $stop = 3;
 
 for($i = $start; $i<=3; $i--){
     if($i<10){
-        echo $end $i;
+        echo $end . $i;
     }
 }
 ?>
