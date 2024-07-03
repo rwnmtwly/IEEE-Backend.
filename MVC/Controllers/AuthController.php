@@ -12,7 +12,7 @@ class AuthController extends controller{
 
     public function __construct(){
         //this is to restrict access to the profile
-        $this->registerMiddleWare(new AuthMiddleWare(['profile']));
+        $this->registerMiddleware(new AuthMiddleware(['profile']));
     }
 
     public function login(Request $request, Response $response){

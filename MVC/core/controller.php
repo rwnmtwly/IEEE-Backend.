@@ -15,7 +15,7 @@ class Controller{
     }
 
 
-    public function registerMiddleWare(){
+    public function registerMiddleware(){
         
     }
 }
