@@ -2,20 +2,27 @@
 class Controller{
 
     /**
-     * @var
+     * @var \app\core\middlewares\BaseMiddleware[]
      */
-    public array $middlewares = [];
+    protected array $middlewares = [];
     public string $layout = 'main';
+    public string $action = '';
     public function setLayout($layout){
         $this->layput = $layout;
     }
 
     public function render($view, $params = []){
-        return application::$app->router->renderView($view, $params);
+        return application::$app->view->renderView($view, $params);
     }
 
 
-    public function registerMiddleware(){
-        
+    public function registerMiddleware(BaseMiddleware $middleware){
+        $this->middlewares[] = $middleware;
+
+    }
+
+
+    public function getMiddleware():array{
+        return $this->middlewares;
     }
 }

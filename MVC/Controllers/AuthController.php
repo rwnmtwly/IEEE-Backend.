@@ -62,6 +62,7 @@ class AuthController extends controller{
     }
 
     public function profile(){
+        
         return $this->render('profile');
     }
 

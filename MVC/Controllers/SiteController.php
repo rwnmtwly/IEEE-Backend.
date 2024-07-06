@@ -15,14 +15,21 @@ class SiteController extends controller{
         return $this->render('home', $params);
     }
 
-    public function contact(){
+    public function contact(Resquest $request, Response $response){
+
+        $contact = new ContactForm();
+        if($request->is_post()){
+            $contact->loadData($request->getBody());
+            if($contact->validate() && $contact->send()){
+                Application::$app->session->setFlash('Success', 'Thanks for contacting us.');
+                return $response->redirect('/contact');
+            }
+        }
        
-        return $this->render('contact');
+        return $this->render('contact', [
+            'model'=>$contact
+        ]);
     }
 
-    public function handleContact(Request $request){
-        $body = $request->getBody();
-        return 'Handling submitted data';
-    }
 }
 ?>
