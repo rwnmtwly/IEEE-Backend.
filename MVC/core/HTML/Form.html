@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="8">
+        <meta name="viewport" content="width = device-width, initial-scale =1.0">
+        <title>Form</title>
+    </head>
+    <body>
+        <form action="index.php" method="post" enctype="multipart/form-data">
+
+            <!--name-->
+            <lebel for="Name">Name:</lebel>
+            <input type="text" id="Name" placeholder="spongebob squarepants" minlength="2" maxlength="30" required>
+            <br><br>
+
+            <!--phone number-->
+            <label for="Phone number">Phone Number</label>
+            <input type="tel" id="Phone Number" placeholder="012-345-6789" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" required>
+            <br><br>
+
+            <!--dob-->
+            <label for="Date Of Birth">Date Of Birth:</label>
+            <input type="date">
+            <br><br>
+
+            <!--Gender-->
+            <label for="Gender">Gender:</label>
+            <label for="Female">Female</label>
+            <input type="radio" id="Female" value="Femal" name="Gender">
+            <label for="Male">Male</label>
+            <input type="radio" id="Male" value="Male" name="Gender">
+            <lebel for="prefer not to say">Prefer Not To Say</lebel>
+            <input type="radio" id="prefer not to say" value="Prefer Not To Say" name="Gender" required>
+            <br><br>
+
+            <!--Hobbies-->
+            <label for="Hobbies">Hobbies:</label>
+            <label for="Swimming">Swimming</label>
+            <input type="checkbox" id="Swimming">
+            <label for="Reading">Reading</label>
+            <input type="checkbox" id="Reading">
+            <label for="Archery">Archery</label>
+            <input type="checkbox" id="Archery">
+            <label for="Martial Arts">Martial Arts</label>
+            <input type="checkbox" id="Martial Arts">
+            <label for="Handicrafts">Handicrafts</label>
+            <input type="checkbox" id="Handicrafts">
+            <label for="Art">Art</label>
+            <input type="checkbox" id="Art">
+            <br><br>
+
+            <!--technical tracks-->
+            <label for="Technical Tracks">Technical Tracks:</label>
+            <select id="Technical Tracks">
+                <option>Frontend</option>
+                <option>Backend</option>
+                <option>AI</option>
+                <option>Advanced AI</option>
+                <option>Mobile</option>
+            </select>
+            <br><br>
+
+            <!--pfp-->
+            <label for="Profile Picture">Profile Picture:</label>
+            <input type="file" id="Profile Picture" accept="image/png, image/jpeg, image/jpj" required>
+            <br><br>
+
+            <!--cv-->
+            <label for="CV">CV:</label>
+            <input type="file" id="CV" accept=".pdf" required>
+            <br><br>
+
+            <!--voice introduction-->
+            <label for="Introduction (1 minute audio)">Introduction (1 minute audio)</label>
+            <input type="file" id="Introduction (1 minute audio)" accept="audio/*" required>
+            <br><br>
+            <input type="submit">
+            <br><br>
+        </form>
+        
+        <a href="Home.html" target="_blank" title="My Home Page">
+            My Home Page
+        </a>
+    </body>
+</html>
