@@ -2,7 +2,9 @@
 ## content:
 1. [Request Lifecycle](#request-lifecycle).
 1. [Facades](#facades).
-3. [Laravel Routing](#laravel-routing).
+1. [Laravel Routing](#laravel-routing).
+1. [Blade Templates and how it works](#blade-templates-and-how-they-work).
+
 
 ---
 
@@ -80,7 +82,31 @@ The user controller will call for the function **showProfile** with parameter as
 
 ---
 
+## Blade Templates and how they work:
+Blade is the simple, yet powerful templating engine that is included with Laravel. Unlike some PHP templating engines, Blade does not restrict you from using plain PHP code in your templates. In fact, all Blade templates are compiled into plain PHP code and cached until they are modified, meaning Blade adds essentially zero overhead to your application. Blade template files use the `.blade.php` file extension and are typically stored in the `resources/views` directory.  
+**Displaying Data:**  
+You may display data that is passed to your Blade views by wrapping the variable in curly braces.  
+```php
+Route::get('/', function () {
+    return view('welcome', ['name' => 'Samantha']);
+});
+```  
+You may display the contents of the name variable like so:
+```php
+Hello, {{ $name }}.
+```  
+> Blade's {{ }} echo statements are automatically sent through PHP's htmlspecialchars function to prevent XSS attacks.  
+
+You may also echo the results of any PHP function. In fact, you can put any PHP code you wish inside of a 
+Blade echo statement:
+```php 
+The current UNIX timestamp is {{ time() }}.
+```
+
+---
+
 ## References in order of appearance:
 1. [Gemini](https://g.co/gemini/share/893cba455f26).
 1. [Laravel](https://laravel.com/docs/11.x/facades).
 1. [Tutorials point](https://www.tutorialspoint.com/laravel/laravel_routing.htm).
+1. [Laravel](https://laravel.com/docs/11.x/blade).
